@@ -8,6 +8,7 @@ import {
 import './styles.css';
 
 export default function App() {
+  const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState([]);
 
   const fetchWeather = useCallback(async function (city) {
@@ -32,14 +33,21 @@ export default function App() {
           .filter((data) => data.status === 'fulfilled')
           .map((item) => item.value);
         setWeatherData(values);
+        setErrorMessage('');
       } catch (e) {
         console.log(e);
+        setErrorMessage('An error occurred while fetching weather data.');
+        setWeatherData([]);
       }
     };
 
     fetchAllWeatherData();
   }, [fetchWeather]);
 
+  if (errorMessage) {
+    return <div>{errorMessage}</div>;
+  }
+  
   if (weatherData.length === 0) {
     return <div>Loading ...</div>;
   }
@@ -49,9 +57,9 @@ export default function App() {
       {weatherData.map((item, idx) => {
         const { name: cityName, dt, wind, main } = item;
         const formattedDate = formatDateToDDMMYYYY(dt);
-        const windSpeed = `${convertMetersPerSecondToKilometersPerHour(
+        const windSpeed = wind ? `${convertMetersPerSecondToKilometersPerHour(
           wind.speed
-        )} km/h`;
+        )} km/h` : '';
         const temperatureValue = `${convertKelvinToCelsius(main.temp)} °C`;
         return (
           <WeatherItem
