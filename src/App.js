@@ -5,7 +5,6 @@ import './styles.css';
 
 export default function App() {
   const [weatherData, setWeatherData] = useState([]);
-  const cities = ["Kraków", "Warszawa", "Gdańsk"];
 
   async function fetchWeather(city) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`;
@@ -21,6 +20,7 @@ export default function App() {
   useEffect(() => {
     const fetchAllWeatherData = async () => {
       try {
+        const cities = ["Kraków", "Warszawa", "Gdańsk"];
         const data = await Promise.all(cities.map((city) => fetchWeather(city)));
         setWeatherData(data);
       } catch (e) {
