@@ -1,12 +1,15 @@
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: 'Open Sans', sans-serif;
 }
 
 .weather-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 978px;
-  margin: 0 auto;
   row-gap: 33px;
 }
 
