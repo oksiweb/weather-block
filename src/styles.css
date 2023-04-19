@@ -4,17 +4,16 @@ body {
 
 .weather-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   flex-direction: column;
   max-width: 978px;
   margin: 0 auto;
-  gap: 20px;
+  row-gap: 33px;
 }
 
 @media (min-width: 978px) {
   .weather-container {
     flex-direction: row;
+    column-gap: 20px;
   }
 }
 
@@ -22,13 +21,11 @@ body {
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  justify-content: space-between;
   background: #dfe7f2;
   border-radius: 20px;
   flex: 1;
   width: 313px;
   max-height: 361px;
-  margin: 0 auto;
   padding: 20px;
 }
 
